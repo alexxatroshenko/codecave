@@ -1,0 +1,19 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>6ec891d1-c9d2-4da9-8c6b-12a6c40f11d5</UserSecretsId>
+    <RootNamespace>AspireJavaScript.AppHost</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+  <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.1.1" />
+  <ProjectReference Include="..\TrainDaily.Api\TrainDaily.Api.csproj" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.0" />
+    
+  </ItemGroup>
+
+</Project>
