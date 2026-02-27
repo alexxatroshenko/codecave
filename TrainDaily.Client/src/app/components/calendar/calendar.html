@@ -1,0 +1,56 @@
+<div class="month-slider">
+  <a (click)="getPreviousMonth()"><</a>
+  <a (click)="getNextMonth()">></a>
+  <div>{{currentMonthAndYearStringInfo}}</div>
+</div>
+<div class="page-container">
+  <div class="calendar">
+    <div class="weekdays">
+      <div>Пн</div>
+      <div>Вт</div>
+      <div>Ср</div>
+      <div>Чт</div>
+      <div>Пт</div>
+      <div>Сб</div>
+      <div>Вс</div>
+    </div>
+
+    <div class="weeks">
+      @for(week of calendarWeeks; track $index){
+      <div class="week">
+        @for(day of week; track $index){
+        <div
+          class="day"
+          [class.empty]="!day"
+          [class.has-trainings]="day?.trainings?.length"
+          [class.today]="day?.date?.toDateString() == today.toDateString()"
+        >
+          <div class="day-header">
+            <div class="day-number">{{ day?.date | date:'d' }}</div>
+            @if(day){
+            <a (click)="openAddTraining(day.date)" title="Добавить упражнение" class="add-training"
+              >+</a
+            >}
+          </div>
+
+          <a (click)="openChoosenDayInfo(day)" class="trainings-info">
+            @if(day?.trainings?.length){
+            <div class="trainings">
+              @for(training of day?.trainings; track $index){ @if($index < 2){
+              <div class="training">{{ training.title }}</div>
+              } }
+            </div>
+
+            @let trainingsCount = day?.trainings?.length ?? 0; @if(trainingsCount > 2){
+            <div class="trainings-count">+{{ trainingsCount - 2 }}</div>
+            } }
+          </a>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  <app-day-dashboard [trainingInfos]="choosenTrainingDayInfos"> </app-day-dashboard>
+  <app-add-training [trainingDay]="dayToAddTraining"></app-add-training>
+</div>

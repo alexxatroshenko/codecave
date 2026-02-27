@@ -1,0 +1,12 @@
+<div class="page-container" [class.opened]="trainingInfos && trainingInfos.trainings.length > 0">
+  @for(item of trainingInfos?.trainings; track $index){
+  <h2>{{item.title}}</h2>
+  <i>{{item.durationTimeInMinutes}} минут</i>
+  <p>{{item.description}}</p>
+  <p>{{item.status}}</p>
+
+  <button (click)="changeStatus(item)">
+    Изменить статус на {{item.status === "Выполнено" ? '"не выполнено"' : '"выполнено"'}}
+  </button>
+  }
+</div>

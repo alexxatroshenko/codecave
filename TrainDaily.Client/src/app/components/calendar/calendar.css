@@ -1,0 +1,113 @@
+.month-slider > a {
+  border: 1px solid black;
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.page-container {
+  display: flex;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-training {
+  background-color: rgb(152, 223, 152);
+  border-radius: 5px;
+  padding-inline: 2px;
+  cursor: pointer;
+}
+
+.calendar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.weekdays {
+  display: flex;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.weekdays > div,
+.day {
+  min-width: 50px;
+  width: calc(100% / 7);
+  padding: 8px;
+  border-right: 1px solid #eee;
+}
+
+.week {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.day {
+  transition: background-color 0.2s;
+  min-height: 100px;
+}
+
+.day:hover {
+  background-color: #f9f9f9;
+}
+
+.day.empty {
+  background-color: #e0dede;
+  color: #ccc;
+}
+
+.day.has-trainings {
+  background-color: #e8f4fd;
+}
+
+.day.today {
+  outline: 2px solid green;
+  outline-offset: -1px;
+}
+
+.day.has-trainings:hover {
+  background-color: #d1e0ec;
+}
+
+.day-number {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.trainings-info {
+  cursor: pointer;
+  height: 80%;
+  display: block;
+}
+
+.trainings {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.training {
+  font-size: 11px;
+  padding: 2px 4px;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trainings-count {
+  font-size: 10px;
+  color: #666;
+  text-align: right;
+  margin-top: 2px;
+}
