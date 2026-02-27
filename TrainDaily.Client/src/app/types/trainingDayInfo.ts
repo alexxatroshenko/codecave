@@ -1,7 +1,7 @@
 export interface TrainingInfo {
   id: number;
   title: string;
-  durationTimeInMinutes: string;
+  durationTimeInMinutes: number;
   description: string;
   status: TrainingStatus;
 }
