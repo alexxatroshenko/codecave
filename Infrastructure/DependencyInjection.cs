@@ -12,7 +12,14 @@ public static class DependencyInjection
     {
         var services = builder.Services;
 
-        builder.AddNpgsqlDbContext<AppDbContext>("db");
+        builder.AddNpgsqlDbContext<AppDbContext>(
+            "db",
+            settings =>
+            {
+                settings.DisableRetry = false;
+                settings.CommandTimeout = 30;
+            }
+        );
 
         services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
 

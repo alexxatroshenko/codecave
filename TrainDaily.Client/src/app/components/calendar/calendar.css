@@ -5,6 +5,13 @@
   border-radius: 5px;
 }
 
+.month-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 .page-container {
   display: flex;
 }

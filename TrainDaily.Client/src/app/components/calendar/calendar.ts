@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { TrainingDayInfo, TrainingDayInfos, TrainingInfos } from '../../types/trainingDayInfo';
 import { DatePipe } from '@angular/common';
 import { DayDashboard } from '../day-dashboard/day-dashboard';
@@ -13,6 +13,8 @@ import { AddTraining } from '../add-training/add-training/add-training';
 })
 export class Calendar implements OnInit {
   trainingService = inject(TrainingDaysService);
+  cdr = inject(ChangeDetectorRef);
+
   trainingData: TrainingDayInfos = [];
 
   today: Date = new Date();
@@ -36,12 +38,21 @@ export class Calendar implements OnInit {
     this.trainingService.trainingsData$.subscribe(data => {
       this.trainingData = data;
       this.buildCalendar();
+      this.cdr.markForCheck();
     });
   }
 
   buildCalendar(): void {
-    const firstDayOfMonth = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
-    const lastDayOfMonth = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
+    const firstDayOfMonth = new Date(
+      this.currentMonthAndYearInfo.getFullYear(),
+      this.currentMonthAndYearInfo.getMonth(),
+      1,
+    );
+    const lastDayOfMonth = new Date(
+      this.currentMonthAndYearInfo.getFullYear(),
+      this.currentMonthAndYearInfo.getMonth() + 1,
+      0,
+    );
 
     let firstDayWeekday = firstDayOfMonth.getDay();
 
@@ -55,7 +66,11 @@ export class Calendar implements OnInit {
         if (week === 0 && weekday < firstDayWeekday) {
           this.calendarWeeks[week][weekday] = null;
         } else if (currentDay <= totalDays) {
-          const currentDate = new Date(this.today.getFullYear(), this.today.getMonth(), currentDay);
+          const currentDate = new Date(
+            this.currentMonthAndYearInfo.getFullYear(),
+            this.currentMonthAndYearInfo.getMonth(),
+            currentDay,
+          );
 
           const trainingDay = this.trainingData.find(item => item.date.getDate() === currentDay);
 

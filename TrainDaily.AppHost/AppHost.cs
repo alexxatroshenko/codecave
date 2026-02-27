@@ -5,7 +5,8 @@ var db = builder.AddPostgres("postgres").WithDataVolume().WithPgAdmin().AddDatab
 var weatherApi = builder
     .AddProject<Projects.TrainDaily_Api>("backend")
     .WithExternalHttpEndpoints()
-    .WithReference(db);
+    .WithReference(db)
+    .WaitFor(db);
 
 builder
     .AddJavaScriptApp("angular", "../TrainDaily.Client", runScriptName: "start")

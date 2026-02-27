@@ -12,26 +12,4 @@ import { WeatherForecast, WeatherForecasts } from './types/weatherForecast';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class AppComponent implements OnInit {
-  title = 'weather';
-  forecasts: WeatherForecasts = [];
-
-  constructor(
-    private http: HttpClient,
-    private cdr: ChangeDetectorRef,
-  ) {}
-
-  ngOnInit(): void {
-    this.http.get<WeatherForecasts>('api/weatherforecast').subscribe({
-      next: result => {
-        this.forecasts = result;
-        this.cdr.detectChanges();
-      },
-      error: console.error,
-    });
-  }
-
-  trackByDate(_index: number, forecast: WeatherForecast) {
-    return forecast.date;
-  }
-}
+export class AppComponent {}

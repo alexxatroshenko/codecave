@@ -5,7 +5,7 @@
   <p>{{item.description}}</p>
   <p>{{item.status}}</p>
 
-  <button (click)="changeStatus(item)">
+  <button (click)="changeStatus(item, trainingInfos!.date!)">
     Изменить статус на {{item.status === "Выполнено" ? '"не выполнено"' : '"выполнено"'}}
   </button>
   }

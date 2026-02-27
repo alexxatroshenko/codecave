@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import {
   TrainingDayInfo,
-  TrainingDayInfos,
   TrainingInfo,
   TrainingStatus,
 } from '../../types/trainingDayInfo';
@@ -19,16 +18,22 @@ export class DayDashboard implements OnInit {
 
   ngOnInit(): void {
     this.trainingService.trainingsData$.subscribe(data => {
-      this.trainingInfos = data.find(x => x.date === this.trainingInfos?.date);
+      if (this.trainingInfos?.date) {
+        this.trainingInfos = data.find(x => this.isSameDate(x.date, this.trainingInfos!.date!));
+      }
     });
   }
 
-  changeStatus(training: TrainingInfo) {
+  private isSameDate(date1: Date, date2: Date): boolean {
+    return date1.toDateString() === date2.toDateString();
+  }
+
+  changeStatus(training: TrainingInfo, date: Date) {
     const newStatus =
       training.status === TrainingStatus.Completed
         ? TrainingStatus.NotCompleted
         : TrainingStatus.Completed;
 
-    this.trainingService.setNewStatus(training.id, newStatus, this.trainingInfos?.date!);
+    this.trainingService.setNewStatus(training.id, newStatus, date);
   }
 }

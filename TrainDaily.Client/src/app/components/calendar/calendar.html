@@ -52,5 +52,9 @@
     </div>
   </div>
   <app-day-dashboard [trainingInfos]="choosenTrainingDayInfos"> </app-day-dashboard>
-  <app-add-training [trainingDay]="dayToAddTraining"></app-add-training>
+  <app-add-training 
+    [trainingDay]="dayToAddTraining"
+    (close)="closeAllMenus()"
+    (trainingAdded)="closeAllMenus()">
+  </app-add-training>
 </div>

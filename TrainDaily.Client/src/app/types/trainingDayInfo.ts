@@ -18,3 +18,4 @@ export enum TrainingStatus {
   Completed = 'Выполнено',
   NotCompleted = 'Не выполнено',
 }
+

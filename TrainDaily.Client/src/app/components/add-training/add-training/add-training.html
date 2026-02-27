@@ -1,8 +1,23 @@
 <div
   class="page-container"
-  [class.opened]="trainingDay
-"
+  [class.opened]="trainingDay"
 >
   <h2>Добавить упражнение</h2>
   <h3>на {{trainingDay?.toLocaleDateString()}}</h3>
+
+  <form (ngSubmit)="submit()" #addTrainingForm="ngForm">
+    <label>
+      Упражнение:
+      <select name="trainingType" [(ngModel)]="selectedTrainingTypeId" required>
+        <option [ngValue]="null">Выберите упражнение</option>
+        @for (type of trainingTypes; track type.id) {
+          <option [ngValue]="type.id">{{ type.title }}</option>
+        }
+      </select>
+    </label>
+
+    <div class="buttons">
+      <button type="submit" [disabled]="!addTrainingForm.valid">Добавить</button>
+    </div>
+  </form>
 </div>
